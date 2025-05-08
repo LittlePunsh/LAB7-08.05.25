@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Админ панель</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<div class="container">
+    <div class="card">
+        <div class="navbar">
+            <span class="navbar-user">Привет, <span th:text="${loggedInUser != null ? loggedInUser.username : 'Гость'}"></span>!</span>
+            <form th:action="@{/logout}" method="post">
+                <button type="submit" class="form-button btn-danger">Выйти</button>
+            </form>
+        </div>
+
+        <h2 class="form-title">Рейсы и билеты</h2>
+
+        <div th:if="${errorMessage}" class="alert alert-danger" th:text="${errorMessage}"></div>
+
+        <div th:unless="${errorMessage}">
+            <table class="table" th:if="${tripsData != null and not #lists.isEmpty(tripsData)}">
+                <thead>
+                <tr>
+                    <th>ID рейса</th>
+                    <th>Номер поезда</th>
+                    <th>Станция отправления</th>
+                    <th>Станция прибытия</th>
+                    <th>Время отправления</th>
+                    <th>Время прибытия</th>
+                    <th>Имя пассажира</th>
+                    <th>Место</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="item : ${tripsData}">
+                    <td th:text="${item.tripId}"></td>
+                    <td th:text="${item.trainNumber}"></td>
+                    <td th:text="${item.departureStation}"></td>
+                    <td th:text="${item.arrivalStation}"></td>
+                    <td th:text="${item.departureTime}"></td>
+                    <td th:text="${item.arrivalTime}"></td>
+                    <td th:text="${item.passengerName}"></td>
+                    <td th:text="${item.seatNumber}"></td>
+                </tr>
+                </tbody>
+            </table>
+            <div th:if="${tripsData == null or #lists.isEmpty(tripsData)}">
+                <p>Нет доступных данных о рейсах и билетах.</p>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

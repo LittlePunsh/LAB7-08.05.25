@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Клиент</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<div class="container">
+    <div class="card">
+        <div class="navbar">
+            <span class="navbar-user">Привет, <span th:text="${loggedInUser != null ? loggedInUser.username : 'Гость'}"></span>!</span>
+            <form th:action="@{/logout}" method="post">
+                <button type="submit" class="form-button btn-danger">Выйти</button>
+            </form>
+        </div>
+
+        <h2 class="form-title">Список рейсов</h2>
+
+        <div th:if="${errorMessage}" class="alert alert-danger" th:text="${errorMessage}"></div>
+
+        <div th:unless="${errorMessage}">
+            <table class="table" th:if="${trips != null and not #lists.isEmpty(trips)}">
+                <thead>
+                <tr>
+                    <th>ID рейса</th>
+                    <th>Номер поезда</th>
+                    <th>Станция отправления</th>
+                    <th>Станция прибытия</th>
+                    <th>Время отправления</th>
+                    <th>Время прибытия</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="trip : ${trips}">
+                    <td th:text="${trip.tripId}"></td>
+                    <td th:text="${trip.trainNumber}"></td>
+                    <td th:text="${trip.departureStation}"></td>
+                    <td th:text="${trip.arrivalStation}"></td>
+                    <td th:text="${trip.departureTime}"></td>
+                    <td th:text="${trip.arrivalTime}"></td>
+                </tr>
+                </tbody>
+            </table>
+            <div th:if="${trips == null or #lists.isEmpty(trips)}">
+                <p>Нет доступных рейсов.</p>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
