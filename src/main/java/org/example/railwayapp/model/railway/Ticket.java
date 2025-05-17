@@ -16,9 +16,8 @@ public class Ticket {
     @Column(name = "ticket_id")
     private Long ticketId;
 
-    // Связь с рейсом: много билетов ссылаются на один рейс
-    @ManyToOne(fetch = FetchType.LAZY) // LAZY - чтобы не грузить рейс всегда вместе с билетом
-    @JoinColumn(name = "trip_id", nullable = false) // Указываем колонку для связи
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "trip_id", nullable = false)
     private Trip trip;
 
     @Column(name = "passenger_name", length = 100)
@@ -28,6 +27,6 @@ public class Ticket {
     private String seatNumber;
 
     @Column(name = "purchase_date")
-    @Temporal(TemporalType.TIMESTAMP) // Указываем тип для даты/времени
+    @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime purchaseDate;
 }
