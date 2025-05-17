@@ -3,7 +3,7 @@ package org.example.railwayapp.service;
 import org.example.railwayapp.model.users.User;
 import org.example.railwayapp.repository.users.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder; // Импортируем PasswordEncoder
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
