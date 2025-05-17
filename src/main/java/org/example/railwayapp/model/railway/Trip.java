@@ -1,6 +1,6 @@
 package org.example.railwayapp.model.railway;
 
-import com.fasterxml.jackson.annotation.JsonIgnore; // Импорт Jackson аннотации
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -33,8 +33,7 @@ public class Trip {
     @Column(name = "arrival_time")
     private String arrivalTime;
 
-    // Связь с билетами: один рейс может иметь много билетов
     @OneToMany(mappedBy = "trip", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonIgnore // <-- Добавляем эту аннотацию
+    @JsonIgnore
     private Set<Ticket> tickets = new HashSet<>();
 }
