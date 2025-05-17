@@ -9,5 +9,5 @@ import lombok.Setter;
 public class LoginResponse {
     private boolean success;
     private String message;
-    private String role; // Добавим роль пользователя в ответ
+    private String role;
 }
