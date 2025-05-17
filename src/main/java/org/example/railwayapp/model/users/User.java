@@ -26,9 +26,8 @@ public class User {
     private String email;
 
     @Column(nullable = false)
-    private String role; // Например, "admin" или "user"
+    private String role; // "admin"/"user"
 
-    // Конструктор для удобства
     public User(String username, String password, String email, String role) {
         this.username = username;
         this.password = password;
