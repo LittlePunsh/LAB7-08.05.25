@@ -6,7 +6,7 @@ import org.example.railwayapp.model.railway.Trip;
 import org.example.railwayapp.repository.railway.TripRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional; // Важно!
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -27,11 +27,9 @@ public class RailwayDataService {
         List<Trip> tripsWithTickets = tripRepository.findAllWithTicketsOrderByDepartureTimeAsc();
         return tripsWithTickets.stream()
                 .flatMap(trip -> {
-                    // Если у рейса нет билетов, все равно отображаем рейс
                     if (trip.getTickets() == null || trip.getTickets().isEmpty()) {
                         return List.of(new AdminTripDto(trip, null)).stream();
                     }
-                    // Для каждого билета создаем отдельную строку DTO
                     return trip.getTickets().stream()
                             .map(ticket -> new AdminTripDto(trip, ticket));
                 })
