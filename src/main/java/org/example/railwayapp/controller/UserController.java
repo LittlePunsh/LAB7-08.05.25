@@ -45,7 +45,6 @@ public class UserController {
             model.addAttribute("loggedInUser", loggedInUser);
         } catch (Exception e) {
             model.addAttribute("errorMessage", "Ошибка загрузки данных: " + e.getMessage());
-            // Логирование
         }
         return "user";
     }
